@@ -5,8 +5,8 @@ import java.util.Random;
  * A simple model of a rabbit.
  * Rabbits age, move, breed, and die.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author Robert James Tallafer
+ * @version 2021.04.12 (3)
  */
 public class Rabbit extends Animal
 {
@@ -25,9 +25,9 @@ public class Rabbit extends Animal
     
     // Individual characteristics (instance fields).
     
-    // The rabbit's age.
-    private int age;
-
+   
+    
+   
     /**
      * Create a new rabbit. A rabbit may be created with age
      * zero (a new born) or with a random age.
@@ -39,9 +39,9 @@ public class Rabbit extends Animal
     public Rabbit(boolean randomAge, Field field, Location location)
     {
         super(field, location);
-        age = 0;
+        setAge(0);
         if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
+            setAge(rand.nextInt(MAX_AGE));
         }
     }
     
@@ -68,15 +68,39 @@ public class Rabbit extends Animal
     }
 
     /**
-     * Increase the age.
-     * This could result in the rabbit's death.
+     * 
+     * @return the age when rabbits start to breed.
      */
-    private void incrementAge()
+    public int getBreedingAge()
     {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
+     return BREEDING_AGE;    
+    }
+    
+    /**
+     * 
+     * @returns the max age of the rabbit.
+     */
+    public int getMaxAge()
+    {
+     return MAX_AGE;    
+    }
+    
+      /**
+     * 
+     * @returns the max age of the fox breed.
+     */
+    public int getMaxLitterSize()
+    {
+     return MAX_LITTER_SIZE;    
+    }
+    
+    /**
+     * 
+     * @returns the max age of the fox breed.
+     */
+    public double getBreedingProbability()
+    {
+     return BREEDING_PROBABILITY;    
     }
     
     /**
@@ -90,34 +114,12 @@ public class Rabbit extends Animal
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
-        int births = breed();
+        int births = getBirths();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
             Rabbit young = new Rabbit(false, field, loc);
             newRabbits.add(young);
         }
     }
-        
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
-
-    /**
-     * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
-     */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
-    }
+    
 }
