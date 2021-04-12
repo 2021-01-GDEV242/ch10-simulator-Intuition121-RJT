@@ -27,8 +27,7 @@ public class Fox extends Animal
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
-    // Individual characteristics (instance fields).
-    // The fox's age.
+   
     
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
