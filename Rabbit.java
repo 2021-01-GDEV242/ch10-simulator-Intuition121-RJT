@@ -87,7 +87,7 @@ public class Rabbit extends Animal
     
       /**
      * 
-     * @returns the max age of the fox breed.
+     * @returns the max age of the rabbit breed.
      */
     public int getMaxLitterSize()
     {
@@ -96,7 +96,7 @@ public class Rabbit extends Animal
     
     /**
      * 
-     * @returns the max age of the fox breed.
+     * @returns the max age of the rabbit breed.
      */
     public double getBreedingProbability()
     {
